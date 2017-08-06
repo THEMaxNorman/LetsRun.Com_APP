@@ -16,6 +16,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
     
     //the user of the account - only one
     var user = userAccount();
+	@IBOutlet weak var loadspin: UIActivityIndicatorView!
     
     @IBOutlet weak var loginScreen: UIView!
     
@@ -54,52 +55,80 @@ class ViewController: UIViewController, UIWebViewDelegate {
     
     @IBOutlet weak var popUp: UIView!
 
+	@IBOutlet weak var watchedthreads: UIBarButtonItem!
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     @IBOutlet weak var webView: UIWebView!
 
+	@IBOutlet weak var reloaddbutton: UIButton!
+	@IBOutlet weak var forwardbutton: UIBarButtonItem!
+	@IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var popUpNamer: UITextField!
    
     @IBAction func OpenFavorite(_ sender: Any) {
         
         webView.loadHTMLString(user.htmlFavs() , baseURL: nil)
     }
+	func webViewDidStartLoad(_ webView: UIWebView) {
+		loadspin.startAnimating()
+		reloaddbutton.isHidden = true
+	}
     var htmlTitle = "";
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        webView.scalesPageToFit = true;
-       if let text = webView.request?.url?.absoluteString{
+	
+	func webViewDidFinishLoad(_ webView: UIWebView) {
+		loadspin.stopAnimating()
+				reloaddbutton.isHidden = false
+		//makes it look better - not sure if nessecary but why not
+		webView.scalesPageToFit = true;
+		//sets current url for saving to favoritelink array
+		if let text = webView.request?.url?.absoluteString{
             currentUrl = text;
-            //SearchBar.text = currentUrl;
-            //print(text);
-            if(webView.stringByEvaluatingJavaScript(from: "document.title") != nil){
-                htmlTitle = webView.stringByEvaluatingJavaScript(from: "document.title")!;
-            }
-        
-        }
-        //gonna be a cool feature
-        
+		}
+		//sets htmlTitle (if there is one) to the title 
+		//used for favorite link array
+		if(webView.stringByEvaluatingJavaScript(from: "document.title") != nil){
+			htmlTitle = webView.stringByEvaluatingJavaScript(from: "document.title")!;
+		}
+		autoFill();
+	}
+	//autofills user name and password
+	func autoFill(){
+		if(currentUrl.contains("reply") || htmlTitle.contains("New Post")){
+			checkUserAndAF();
+			checkPassAndAF();
+			let sign : String = HtmlSafe(str: user._signature)
+			let loadSignatureJS = "document.getElementsByName('author')[0].value = \(sign)"
+		}
 
-        var userName = "'"
-        if(user.userName != nil){
-            userName.append(user.userName!);
-        }
-        userName.append("'");
-        print(userName)
-        if(currentUrl.contains("reply") || htmlTitle.contains("New Post")){
-            if (true) {
-                let loadUsernameJS = "document.getElementsByName('author')[0].value = \(userName)"
-                
-                var user = webView.stringByEvaluatingJavaScript(from: loadUsernameJS);
-                print(user);
-            
-            }
-        }
+	}
+	//a function needed to make the string being inputted work properly because they need ''
+    func HtmlSafe(str : String) -> String{
+        var txt = "'"
+        txt.append(str);
+        txt.append("'");
+        return txt
     }
-        
+	//makes sure username isnt nil and then autofills the field
+	func checkUserAndAF(){
+		if (user.userName != nil) {
+			let username : String = HtmlSafe(str: user.userName!)
+			let loadUsernameJS = "document.getElementsByName('author')[0].value = \(username)"
+			self.webView.stringByEvaluatingJavaScript(from: loadUsernameJS);
+			
+		}
+	}
+	//makes sure password isnt nil and then autofills the field
+	func checkPassAndAF() {
+		if(user.passWord != nil){
+			let password : String = HtmlSafe(str: user.passWord!)
+			let loadPasswordJS = "document.getElementsByName('ppass')[0].value = \(password)"
+			self.webView.stringByEvaluatingJavaScript(from: loadPasswordJS);
+		}
+	}
 
-  
+	
     @IBAction func Beginsave(_ sender: Any) {
          //Shows the popup which allows the user to name the link
         popUp.isHidden = false;
@@ -201,9 +230,9 @@ class ViewController: UIViewController, UIWebViewDelegate {
         }
         return string
     }
+	// a function to return all the time equivalents for the time input
     func prettyPrintAll(time : Double , event:Double) -> String {
         var endString = "Your Equivalents: \n"
-        endString.append("800m: \(convertTimeBack(tot: convert(time: time, event: event, event2: 800.0)))\n")
         endString.append("1500m: \(convertTimeBack(tot: convert(time: time, event: event, event2: 1500.0)))\n")
         endString.append("Mile: \(convertTimeBack(tot: convert(time: time, event: event, event2: 1609.0)))\n")
         endString.append("3000m: \(convertTimeBack(tot: convert(time: time, event: event, event2: 3000.0)))\n")
