@@ -16,6 +16,7 @@
 		1A2E5B811F155592004EE7C1 /* LetsRun_ComUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E5B801F155592004EE7C1 /* LetsRun_ComUITests.swift */; };
 		1A2E5B931F158550004EE7C1 /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E5B921F158550004EE7C1 /* UserPageViewController.swift */; };
 		1A3E72731F365F7A00F188DF /* userAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3E72721F365F7A00F188DF /* userAccount.swift */; };
+		1A3E72751F3790C200F188DF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A3E72741F3790C200F188DF /* Images.xcassets */; };
 		1A51E04B1F16D88A00D035B0 /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1A51E0491F16D88A00D035B0 /* UserData.xcdatamodeld */; };
 		1A51E04D1F1D513E00D035B0 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A51E04C1F1D513E00D035B0 /* GameViewController.swift */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		1A2E5B821F155592004EE7C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A2E5B921F158550004EE7C1 /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
 		1A3E72721F365F7A00F188DF /* userAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userAccount.swift; sourceTree = "<group>"; };
+		1A3E72741F3790C200F188DF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1A51E04A1F16D88A00D035B0 /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
 		1A51E04C1F1D513E00D035B0 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +117,7 @@
 				1A2E5B671F155592004EE7C1 /* Assets.xcassets */,
 				1A2E5B691F155592004EE7C1 /* LaunchScreen.storyboard */,
 				1A2E5B6C1F155592004EE7C1 /* Info.plist */,
+				1A3E72741F3790C200F188DF /* Images.xcassets */,
 			);
 			path = LetsRun.Com;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A2E5B6B1F155592004EE7C1 /* LaunchScreen.storyboard in Resources */,
+				1A3E72751F3790C200F188DF /* Images.xcassets in Resources */,
 				1A2E5B681F155592004EE7C1 /* Assets.xcassets in Resources */,
 				1A2E5B661F155592004EE7C1 /* Main.storyboard in Resources */,
 			);
@@ -432,24 +436,28 @@
 		1A2E5B861F155592004EE7C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = C9H8L5V2WB;
 				INFOPLIST_FILE = LetsRun.Com/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Normans.LetsRun-Com";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		1A2E5B871F155592004EE7C1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = C9H8L5V2WB;
 				INFOPLIST_FILE = LetsRun.Com/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Normans.LetsRun-Com";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
