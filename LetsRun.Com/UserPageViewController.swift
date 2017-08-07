@@ -19,7 +19,6 @@ class UserPageViewController: UIViewController {
         
         ViewController.loadData();
         //SHOULD set the stuff to the username that is saved 
-        //Aug 5th 2:30 this is not working
         UserNameLabel.text = ViewController.user.userName
         UserNameField.text = ViewController.user.userName
         // Do any additional setup after loading the view.

@@ -61,16 +61,17 @@ class ViewController: UIViewController, UIWebViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     @IBOutlet weak var webView: UIWebView!
-
+	var repeater : Timer!
 	@IBOutlet weak var reloaddbutton: UIButton!
 	@IBOutlet weak var forwardbutton: UIBarButtonItem!
 	@IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var popUpNamer: UITextField!
-   
+	var htmlIsOpen = false;
     @IBAction func OpenFavorite(_ sender: Any) {
-        
         webView.loadHTMLString(user.htmlFavs() , baseURL: nil)
+		htmlIsOpen = true
     }
+	
 	func webViewDidStartLoad(_ webView: UIWebView) {
 		loadspin.startAnimating()
 		reloaddbutton.isHidden = true
@@ -79,21 +80,44 @@ class ViewController: UIViewController, UIWebViewDelegate {
 	
 	func webViewDidFinishLoad(_ webView: UIWebView) {
 		loadspin.stopAnimating()
-				reloaddbutton.isHidden = false
+		reloaddbutton.isHidden = false
 		//makes it look better - not sure if nessecary but why not
 		webView.scalesPageToFit = true;
 		//sets current url for saving to favoritelink array
 		if let text = webView.request?.url?.absoluteString{
-            currentUrl = text;
+			currentUrl = text;
+			
 		}
 		//sets htmlTitle (if there is one) to the title 
 		//used for favorite link array
 		if(webView.stringByEvaluatingJavaScript(from: "document.title") != nil){
 			htmlTitle = webView.stringByEvaluatingJavaScript(from: "document.title")!;
 		}
+		if(currentUrl.contains("about:blank") && repeater == nil){
+			repeater = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(checkTitle), userInfo: nil, repeats: true)
+		}else if(repeater != nil ){
+			repeater.invalidate()
+			repeater = nil;
+		}
 		autoFill();
+	
+		
+		
+		//user.updateList(str: htmlTitle)
+		
+		
 	}
 	//autofills user name and password
+	
+	func checkTitle() {
+		print("checking");
+		htmlTitle = webView.stringByEvaluatingJavaScript(from: "document.title")!;
+		user.updateList(str: htmlTitle);
+		saveData(user: user);
+		if(user.favoriteLinks.count == 0){
+			webView.loadHTMLString(user.htmlFavs() , baseURL: nil)
+		}
+	}
 	func autoFill(){
 		if(currentUrl.contains("reply") || htmlTitle.contains("New Post")){
 			checkUserAndAF();

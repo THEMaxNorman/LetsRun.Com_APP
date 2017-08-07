@@ -58,6 +58,16 @@ class userAccount: NSObject, NSCoding {
         //adds the link to the list
         favoriteLinks[Link] =  Name;
     }
+    func updateList(str : String){
+        let tot = str.components(separatedBy: ",")
+        for String in tot{
+            for (link, Name) in favoriteLinks {
+                if(String.contains(link)){
+                    favoriteLinks.removeValue(forKey: link)
+                }
+            }
+        }
+    }
     
     func htmlFavs() -> String {
         //returns a string with every favorite thread in links
@@ -66,19 +76,18 @@ class userAccount: NSObject, NSCoding {
          gives it a very native look
          */
         if(favoriteLinks.count > 0){
-            var text : String = "<style> div.transbox { margin: 0px; background-color: #cccccc; border: 1px solid white; opacity: 1; filter: alpha(opacity=60); /* For IE8 and earlier */} div.transbox2 { margin: 0px; background-color: #fffece; border: 1px solid white; opacity: 1; filter: alpha(opacity=60); /* For IE8 and earlier */ } div.transbox p { font-family: \("Helvetica Neue"), Helvetica, Arial, sans-serif; font-size: 14px; color: #000000;} div.transbox2 p { font-family: \("Helvetica Neue"), Helvetica, Arial, sans-serif;font-size: 14px;color: #000000;} </style> <body>";
+            var text : String = "<style> body{background-color : #fffece; } div.transbox { margin: 0px; background-color: #cccccc; border: 1px solid white; opacity: 1; filter: alpha(opacity=60); /* For IE8 and earlier */} div.transbox2 { margin: 0px; background-color: #fffece; border: 1px solid white; opacity: 1; filter: alpha(opacity=60); /* For IE8 and earlier */ } div.transbox p { font-family: \("Helvetica Neue"), Helvetica, Arial, sans-serif; font-size: 14px; color: #000000;} div.transbox2 p { font-family: \("Helvetica Neue"), Helvetica, Arial, sans-serif;font-size: 14px;color: #000000;} </style> <body><script>function myFunction(elmnt) {elmnt.parentNode.remove(elmnt);document.title = document.title + elmnt.parentNode.innerHTML +',';}</script>";
         
             var c = 0;
             // the counter is used to alternate it
             for (link,  Name) in favoriteLinks {
                 c += 1;
-                //todo: add CSS and make it better looking
                 print(link);
                 print(Name)
                 if(c % 2 == 0){
-                    text.append("<div class = \("transbox")> <p><a href = \(link)> \(Name)</a></p></div>" )
+                    text.append("<div class = \("transbox")> <p><a href = \(link)> \(Name)</a><button onclick='myFunction(this)'>X</button></p></div>" )
                 }else{
-                    text.append("<div class = \("transbox2")> <p><a href = \(link)> \(Name)</a></p></div>" )
+                    text.append("<div class = \("transbox2")> <p><a href = \(link)> \(Name)</a><button onclick='myFunction(this)'>X</button></p></div>" )
                 }
             
             
@@ -87,6 +96,6 @@ class userAccount: NSObject, NSCoding {
             print(text);
             return text;
         }else{
-            return "<style> body{background-color: #FFFECE} p{text-align:center}</style><body><p> Aww nuts</p> <p>No watched threads! </p> <p><a href = letsrun.com> Return to HomePage</a></p> <p><img src= http://68.media.tumblr.com/face58fc0b5baf7c9b824c8dcb185355/tumblr_o4z7jyMq0d1utvn4oo2_500.jpg width= 500  height= 750></p></body>"        }
+            return "<style> body{background-color: #FFFECE} p{text-align:center}</style><body><p> Aww nuts</p> <p>No watched threads! </p> <p><a href = 'http://www.letsrun.com/'> Return to Home Page</a></p> <p><img src= http://68.media.tumblr.com/face58fc0b5baf7c9b824c8dcb185355/tumblr_o4z7jyMq0d1utvn4oo2_500.jpg width= 500  height= 750></p></body>"        }
     }
 }
