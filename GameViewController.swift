@@ -100,7 +100,7 @@ class GameViewController: UIViewController {
         let q7 = Question()
         q7.addQuestion(Q: "At your Junior College, your focus is:", ans1: "Grinding", ans2: "Studying", ans3: "Partying", ansD1: "_14:30_0_1000_7", ansD2:"_14:40_0_10000_8" , ansD3: "_14:40_2_1000_9");
         questionList.append(q7);
-        
+        let q8 = Question()
         
     }
     // each of these are the function buttons and use the ansDecode function

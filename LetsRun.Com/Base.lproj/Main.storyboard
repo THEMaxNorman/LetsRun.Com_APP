@@ -53,6 +53,9 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="action" id="fPi-yX-aEm">
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="share:" destination="BYZ-38-t0r" id="H5C-Kc-XcC"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem title="Watched Threads" width="158" id="Ucn-QL-VeH">
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -330,16 +333,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSq-Ac-jiM">
-                                <rect key="frame" x="140" y="387" width="135" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back to the forums!">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="dUX-bT-5UA"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GpX-RX-c5G">
                                 <rect key="frame" x="47" y="141" width="84" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -403,14 +396,14 @@
                                 <rect key="frame" x="87" y="20" width="251" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Exb-Mt-KBK">
-                                <rect key="frame" x="139" y="338" width="134" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSq-Ac-jiM">
+                                <rect key="frame" x="140" y="327" width="135" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Play the LRC game!">
+                                <state key="normal" title="Back to the forums!">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="EBP-M1-F7c" kind="show" id="ZRo-zk-rUF"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="dUX-bT-5UA"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -641,6 +634,6 @@
         <image name="refresh_2x" width="36" height="44"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="220-05-NFs"/>
+        <segue reference="dUX-bT-5UA"/>
     </inferredMetricsTieBreakers>
 </document>

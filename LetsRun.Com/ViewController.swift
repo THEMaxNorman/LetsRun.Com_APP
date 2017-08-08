@@ -32,7 +32,24 @@ class ViewController: UIViewController, UIWebViewDelegate {
         let request = NSURLRequest(url: url! as URL);
         webView.loadRequest(request as URLRequest);
     }
-    
+	
+	@IBAction func share(_ sender: Any) {
+		// text to share
+		let text = "This is some text that I want to share."
+		
+		// set up activity view controller
+		let textToShare = [ text ]
+		let secondActivityItem : NSURL = NSURL(string: currentUrl)!
+		let activityViewController = UIActivityViewController(activityItems: [secondActivityItem, htmlTitle], applicationActivities: nil)
+		activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+		
+		// exclude some activity types from the list (optional)
+		//activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+		
+		// present the view controller
+		self.present(activityViewController, animated: true, completion: nil)
+	}
+	
     var filePath: String {
         //1 - manager lets you examine contents of a files and folders in your app; creates a directory to where we are saving it
         let manager = FileManager.default
@@ -123,7 +140,8 @@ class ViewController: UIViewController, UIWebViewDelegate {
 			checkUserAndAF();
 			checkPassAndAF();
 			let sign : String = HtmlSafe(str: user._signature)
-			let loadSignatureJS = "document.getElementsByName('author')[0].value = \(sign)"
+			let loadSignatureJS = "document.getElementsByTagName('textarea')[0].value = \(sign)"
+			self.webView.stringByEvaluatingJavaScript(from: loadSignatureJS)
 		}
 
 	}

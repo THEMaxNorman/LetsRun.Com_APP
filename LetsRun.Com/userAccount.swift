@@ -23,7 +23,7 @@ class userAccount: NSObject, NSCoding {
     
     var passWord : String?
     
-    var _signature : String = "Posted with LRC App"
+    var _signature : String = "Posted using the LRC App"
     
     var favoriteLinks : [String : String] = [:];
     required init(coder decoder: NSCoder) {
